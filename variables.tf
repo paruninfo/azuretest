@@ -27,3 +27,19 @@ variable "admin_password" {
   default     = null
 }
 
+variable "vnet_name" {
+  type        = string
+  description = "Enter Virtual Network Name."
+  
+}
+variable "subnet_name" {
+  type        = string
+  description = "Enter Virtual Network Name."
+  
+}
+
+variable "var.network_rg_name" {
+  type        = string
+  description = "Enter Virtual Network resource Group Name."
+  
+}
