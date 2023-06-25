@@ -26,3 +26,4 @@ variable "admin_password" {
   sensitive   = true
   default     = null
 }
+
