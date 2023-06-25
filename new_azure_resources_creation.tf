@@ -59,18 +59,28 @@ resource azurerm_storage_container "myblobs" {
   container_access_type = "private"
 }
 
+resource "random_password" "password" {
+  length           = 16
+  special          = true
+  override_special = "_%@"
+}
 
 resource "azurerm_mssql_server" "server" {
   name                         = "az-ms-sql-server-test"
   resource_group_name          = azurerm_resource_group.rg.name
   location                     = azurerm_resource_group.rg.location
   administrator_login          = var.admin_username
-  administrator_login_password = local.admin_password
+  administrator_login_password = random_password.password.result
+  minimum_tls_version          = 1.2
+  public_network_access_enabled = true
   version                      = "12.0"
 }
 
 resource "azurerm_mssql_database" "db" {
   name      = var.sql_db_name
   server_id = azurerm_mssql_server.server.id
+  collation      = "SQL_Latin1_General_CP1_CI_AS"
+  license_type   = "LicenseIncluded"
+  sku_name       = var.sku_name
 }
 
