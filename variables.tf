@@ -38,7 +38,13 @@ variable "subnet_name" {
   
 }
 
-variable "var.network_rg_name" {
+variable "network_rg_name" {
+  type        = string
+  description = "Enter Virtual Network resource Group Name."
+  
+}
+
+variable "sku_name" {
   type        = string
   description = "Enter Virtual Network resource Group Name."
   
